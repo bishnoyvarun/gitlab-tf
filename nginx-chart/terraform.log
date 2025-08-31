@@ -1,0 +1,25 @@
+2025-09-01T02:33:50.881+0530 [INFO]  Terraform version: 1.12.2
+2025-09-01T02:33:50.881+0530 [DEBUG] using github.com/hashicorp/go-tfe v1.74.1
+2025-09-01T02:33:50.881+0530 [DEBUG] using github.com/hashicorp/hcl/v2 v2.23.1-0.20250203194505-ba0759438da2
+2025-09-01T02:33:50.881+0530 [DEBUG] using github.com/hashicorp/terraform-svchost v0.1.1
+2025-09-01T02:33:50.881+0530 [DEBUG] using github.com/zclconf/go-cty v1.16.2
+2025-09-01T02:33:50.881+0530 [INFO]  Go runtime version: go1.24.2
+2025-09-01T02:33:50.881+0530 [INFO]  CLI args: []string{"C:\\Users\\varun\\Downloads\\Terraform\\terraform.exe", "destroy", "-auto-approve"}
+2025-09-01T02:33:50.885+0530 [DEBUG] Attempting to open CLI config file: C:\Users\varun\AppData\Roaming\terraform.rc
+2025-09-01T02:33:50.885+0530 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2025-09-01T02:33:50.885+0530 [DEBUG] ignoring non-existing provider search directory terraform.d/plugins
+2025-09-01T02:33:50.885+0530 [DEBUG] ignoring non-existing provider search directory C:\Users\varun\AppData\Roaming\terraform.d\plugins
+2025-09-01T02:33:50.886+0530 [DEBUG] ignoring non-existing provider search directory C:\Users\varun\AppData\Roaming\HashiCorp\Terraform\plugins
+2025-09-01T02:33:50.887+0530 [INFO]  CLI command args: []string{"destroy", "-auto-approve"}
+2025-09-01T02:33:50.887+0530 [DEBUG] checking for provisioner in "."
+2025-09-01T02:33:50.887+0530 [DEBUG] checking for provisioner in "C:\\Users\\varun\\Downloads\\Terraform"
+2025-09-01T02:33:50.888+0530 [INFO]  backend/local: starting Apply operation
+2025-09-01T02:33:50.892+0530 [DEBUG] Building and walking validate graph
+2025-09-01T02:33:50.893+0530 [DEBUG] Starting graph walk: walkValidate
+2025-09-01T02:33:50.893+0530 [INFO]  backend/local: apply calling Plan
+2025-09-01T02:33:50.893+0530 [DEBUG] Building and walking plan graph for DestroyMode
+2025-09-01T02:33:50.894+0530 [DEBUG] Starting graph walk: walkPlanDestroy
+2025-09-01T02:33:50.894+0530 [DEBUG] no planned changes, skipping apply graph check
+2025-09-01T02:33:50.894+0530 [INFO]  backend/local: apply calling Apply
+2025-09-01T02:33:50.894+0530 [DEBUG] Building and walking apply graph for DestroyMode plan
+2025-09-01T02:33:50.894+0530 [DEBUG] Starting graph walk: walkDestroy
