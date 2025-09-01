@@ -1,28 +1,16 @@
 image:
   name: hashicorp/terraform:1.6.0
-  entrypoint:
-    - '/usr/bin/env'
-    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-
-
-
+  entrypoint: [""]
+  
 variables:
-  #TF_STATE_BUCKET: "your-terraform-backend-bucket"
-  #TF_STATE_KEY: "terraform.tfstate"
   TF_STATE_REGION: "eu-north-1"
-  #TF_CLI_ARGS: "-input=false"
-  AWS_ACCESS_KEY_ID: "AKIA4JAHHIHEA4Y44XV2"
-  AWS_SECRET_ACCESS_KEY: "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"
-
 
 before_script:
   - terraform --version
-  - terraform init
-#  - aws --version
   - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
   - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
   - export AWS_DEFAULT_REGION=$TF_STATE_REGION
-
+  - terraform init
 
 stages:
   - validate
@@ -34,7 +22,7 @@ stages:
 validate:
   stage: validate
   script:
-  - terraform validate
+    - terraform validate
 
 plan:
   stage: plan
@@ -55,20 +43,22 @@ apply:
     - plan
 
 deploy:
-  image: alpine/helm:3.12.0
+  image: amazon/aws-cli:2.13.12
   stage: deploy
+  before_script:
+    - apk add --no-cache bash curl jq gettext helm
+    - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
   script:
     - cd nginx-chart
-    - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
     - helm install 1st-release .
   when: manual
   dependencies:
     - apply  
-  
+
 destroy:
-    stage: destroy
-    script:
-     - terraform destroy -auto-approve
-    when: manual
-    dependencies:
-    - deploy     
+  stage: destroy
+  script:
+    - terraform destroy -auto-approve
+  when: manual
+  dependencies:
+    - deploy
