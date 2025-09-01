@@ -66,7 +66,6 @@ destroy:
   before_script:
     - terraform init -backend-config="bucket=$TF_STATE_BUCKET" -backend-config="key=$TF_STATE_KEY" -backend-config="region=$TF_STATE_REGION"
   script:
-    - helm uninstall 1st-release --namespace default || echo "Helm release not found, skipping"
     - terraform destroy -auto-approve
   when: manual
   only:
