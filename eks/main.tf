@@ -6,15 +6,21 @@ module "eks" {
   kubernetes_version = "1.29"
 
   addons = {
-    coredns                = {}
-    eks-pod-identity-agent = {
-      before_compute = true
-    }
-    kube-proxy             = {}
-    vpc-cni                = {
-      before_compute = true
-    }
+  coredns = {
+    addon_version = "v1.11.4-eksbuild.14"
   }
+  kube-proxy = {
+    addon_version = "v1.29.15-eksbuild.10"
+  }
+  vpc-cni = {
+    addon_version = "v1.20.0-eksbuild.1"
+    before_compute = true
+  }
+  eks-pod-identity-agent = {
+    addon_version = "v1.0.0-eksbuild.1"
+    before_compute = true
+  }
+}
 
   # Optional
   endpoint_public_access = true
