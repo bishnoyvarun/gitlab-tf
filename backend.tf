@@ -1,8 +1,9 @@
 terraform {
   backend "s3" {
-    bucket = "my-tf-bucket0001"
-    key    = "backend.tfstate"
+    bucket = module.s3.mybucket
+    key    = module.s3.key
+    dynamodb_table       = module.db.dbtable
     region = "eu-north-1"
-    dynamodb_table = "LockTable"
+    encrypt = true
   }
 }
