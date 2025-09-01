@@ -6,10 +6,10 @@ image:
 
 
 variables:
-  TF_STATE_BUCKET: "your-terraform-backend-bucket"
-  TF_STATE_KEY: "terraform.tfstate"
+  #TF_STATE_BUCKET: "your-terraform-backend-bucket"
+  #TF_STATE_KEY: "terraform.tfstate"
   TF_STATE_REGION: "eu-north-1"
-  TF_CLI_ARGS: "-input=false"
+  #TF_CLI_ARGS: "-input=false"
 
 
 before_script:
@@ -62,7 +62,7 @@ deploy:
     - apply  
   
 destroy:
-    stage: desttroy
+    stage: destroy
     script:
      - terraform destroy -auto-approve
     when: manual
