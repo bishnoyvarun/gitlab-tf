@@ -57,6 +57,7 @@ deploy:
   image: alpine/helm:3.12.0
   stage: deploy
   script:
+    - cd nginx-chart
     - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
     - helm install 1st-release .
   when: manual
