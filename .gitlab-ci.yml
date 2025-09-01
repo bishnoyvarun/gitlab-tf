@@ -68,5 +68,3 @@ destroy:
   script:
     - terraform destroy -auto-approve
   when: manual
-  only:
-    - main
