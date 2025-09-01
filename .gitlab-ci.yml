@@ -1,0 +1,70 @@
+image:
+  name: registry.gitlab.com/gitlab-org/gitlab-build-images:terraform
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+
+variables:
+  TF_STATE_BUCKET: "your-terraform-backend-bucket"
+  TF_STATE_KEY: "terraform.tfstate"
+  TF_STATE_REGION: "eu-north-1"
+  TF_CLI_ARGS: "-input=false"
+
+
+before_script:
+  - terraform --version
+  - terraform init
+  - aws --version
+  - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  - export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+
+
+stages:
+  - validate
+  - plan
+  - apply
+  - deploy
+  - destroy
+
+validate:
+  stage: validate
+  script:
+  - terraform validate
+
+plan:
+  stage: plan
+  script:
+    - terraform plan -out=tfplan
+  artifacts:
+    paths:
+      - tfplan
+  dependencies:
+    - validate    
+
+apply:
+  stage: apply
+  script:
+    - terraform apply -input=false "tfplan"
+  when: manual
+  dependencies:
+    - plan
+
+deploy:
+  image: alpine/helm:3.12.0
+  stage: deploy
+  script:
+    - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
+    - helm install 1st-release .
+  when: manual
+  dependencies:
+    - apply  
+  
+destroy:
+    stage: desttroy
+    script:
+     - terraform destroy -auto-approve
+    when: manual
+    dependencies:
+    - deploy     
