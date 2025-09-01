@@ -49,7 +49,7 @@ apply:
  
 
 deploy:
-  image: amazon/aws-cli:2.13.12
+  #image: amazon/aws-cli:2.13.12
   stage: deploy
   #before_script:
   #  - echo "TF_STATE_REGION=$TF_STATE_REGION"
