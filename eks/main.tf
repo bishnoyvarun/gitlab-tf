@@ -1,23 +1,25 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.0"
+  version = "~> 21.1.0"
 
   name               = "my-cluster"
   kubernetes_version = "1.29"
 
   addons = {
   coredns = {
-    addon_version = "v1.11.4-eksbuild.14"
+    addon_version  = "v1.11.4-eksbuild.14"
+    before_compute = true
   }
   kube-proxy = {
-    addon_version = "v1.29.15-eksbuild.10"
+    addon_version  = "v1.29.15-eksbuild.10"
+    before_compute = true
   }
   vpc-cni = {
-    addon_version = "v1.20.0-eksbuild.1"
+    addon_version  = "v1.20.0-eksbuild.1"
     before_compute = true
   }
   eks-pod-identity-agent = {
-    addon_version = "v1.0.0-eksbuild.1"
+    addon_version  = "v1.0.0-eksbuild.1"
     before_compute = true
   }
 }
