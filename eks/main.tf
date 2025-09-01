@@ -39,7 +39,7 @@ module "eks" {
     eks_managed_node_groups = {
     test_eks_node = {
       ami_type       = "AL2023_x86_64_STANDARD" # ✅ EKS 1.29 uses AL2023, not AL2
-    instance_types = ["t3.micro"]
+    instance_types = ["t3.small"]
     min_size       = 1
     desired_size   = 1
     max_size       = 2
@@ -47,8 +47,7 @@ module "eks" {
     }
   }
 
-
-  tags = {
+ tags = {
     Environment = "dev"
     Terraform   = "true"
   }
