@@ -14,15 +14,15 @@ module "vpc" {
   
 }
 
-module "s3" {
-  source = "./s3"
-  
-}
+#module "s3" {
+#  source = "./s3"
+#  
+#}
 
-module "db" {
-  source = "./db"
-  
-} 
+#module "db" {
+#  source = "./db"
+#  
+#} 
 module "eks" {
   source = "./eks"
 
@@ -31,8 +31,8 @@ module "eks" {
   subnet2_id  = module.vpc.pb_sn2
   subnet3_id  = module.vpc.pb_sn3
   sg_var        = module.vpc.sg
-  bucket_name   = module.s3.mybucket
-  key_name      = module.s3.key
-  dbtable       = module.db.dbtable
+ # bucket_name   = module.s3.mybucket
+ # key_name      = module.s3.key
+ # dbtable       = module.db.dbtable
 }
 
