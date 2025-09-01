@@ -24,7 +24,6 @@ pre-destroy:
   stage: pre-destroy
   script:
     - terraform destroy -auto-approve
-  when: manual
   allow_failure: true
 
 validate:
