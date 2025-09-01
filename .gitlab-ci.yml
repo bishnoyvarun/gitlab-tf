@@ -60,10 +60,18 @@ deploy:
 
 destroy:
   stage: destroy
+  image: hashicorp/terraform:1.6.0
+  before_script:
+    - terraform --version
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+    - terraform init -backend-config="bucket=$TF_STATE_BUCKET" -backend-config="key=$TF_STATE_KEY" -backend-config="region=$TF_STATE_REGION"
   script:
+    # 1️⃣ Uninstall Helm releases first
+    - helm uninstall 1st-release --namespace default || echo "Helm release not found, skipping"
+    # 2️⃣ Destroy all Terraform-managed resources
     - terraform destroy -auto-approve
   when: manual
-  dependencies:
-    - deploy
   only:
-    - main  
+    - main
