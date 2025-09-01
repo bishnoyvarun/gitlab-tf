@@ -1,7 +1,7 @@
 # DynamoDB Table
 provider "aws" {
   region  = "eu-north-1"
-  profile = "vakky_devpos"
+  #profile = "vakky_devpos"
 }
 
 resource "aws_dynamodb_table" "my_table" {
