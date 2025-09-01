@@ -69,3 +69,5 @@ post-destroy:
   when: manual
   dependencies:
     - deploy
+  only:
+    - main  
