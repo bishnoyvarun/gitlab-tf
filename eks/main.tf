@@ -38,7 +38,7 @@ module "eks" {
   # EKS Managed Node Group(s)
     eks_managed_node_groups = {
     test_eks_node = {
-      ami_type       = "CUSTOM" 
+      ami_type       = "AL2023_x86_64" 
     instance_types = ["c7i-flex.large"]
     min_size       = 1
     desired_size   = 1
