@@ -4,6 +4,9 @@ image:
   
 variables:
   TF_STATE_REGION: "eu-north-1"
+  TF_STATE_BUCKET: "my-tf-bucket0001"   # S3 bucket for remote state
+  TF_STATE_KEY: "backend.tfstate"   # Path in bucket
+  AWS_DEFAULT_REGION: $TF_STATE_REGION
 
 before_script:
   - terraform --version
@@ -13,18 +16,11 @@ before_script:
   - terraform init
 
 stages:
-  - pre-destroy
   - validate
   - plan
   - apply
   - deploy
-  - post-destroy
-
-pre-destroy:
-  stage: pre-destroy
-  script:
-    - terraform destroy -auto-approve
-  allow_failure: true
+  - destroy
 
 validate:
   stage: validate
@@ -62,8 +58,8 @@ deploy:
   dependencies:
     - apply  
 
-post-destroy:
-  stage: post-destroy
+destroy:
+  stage: destroy
   script:
     - terraform destroy -auto-approve
   when: manual
