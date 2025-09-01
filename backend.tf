@@ -1,9 +1,9 @@
-#terraform {
-#  backend "s3" {
-#    bucket = module.s3.mybucket
-#    key    = module.s3.key
-#    dynamodb_table       = module.db.dbtable
-#    region = "eu-north-1"
-#    encrypt = true
-#  }
-#}
+terraform {
+  backend "s3" {
+    bucket = "demosimplebucket-e03613d8ddcc0f3f"
+    key    = "backend.tfstate"
+    dynamodb_table = "LockTable"
+    region = "eu-north-1"
+    encrypt = true
+  }
+}
