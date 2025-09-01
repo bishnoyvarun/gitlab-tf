@@ -26,6 +26,7 @@ validate:
   stage: validate
   script:
     - terraform validate
+  when: manual
 
 plan:
   stage: plan
@@ -36,6 +37,7 @@ plan:
       - tfplan
   dependencies:
     - validate    
+  when: manual
 
 apply:
   stage: apply
@@ -44,6 +46,7 @@ apply:
   when: manual
   dependencies:
     - plan
+ 
 
 deploy:
   image: amazon/aws-cli:2.13.12
