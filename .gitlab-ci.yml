@@ -52,9 +52,9 @@ deploy:
   image: amazon/aws-cli:2.13.12
   stage: deploy
   before_script:
-  - echo "TF_STATE_REGION=$TF_STATE_REGION"
-  - echo "Running aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster"
-  - aws eks update-kubeconfig --region "$TF_STATE_REGION" --name my-cluster
+    - echo "TF_STATE_REGION=$TF_STATE_REGION"
+    - echo "Running aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster"
+    - aws eks update-kubeconfig --region "$TF_STATE_REGION" --name my-cluster
     # Install dependencies
     - apk add --no-cache bash curl jq gettext helm kubectl
 
