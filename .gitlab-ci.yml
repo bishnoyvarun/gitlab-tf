@@ -49,10 +49,10 @@ apply:
  
 
 deploy:
-  image: alpine/helm:3.14.4
+  image: lachlanevenson/k8s-helm:v3.14.4
   stage: deploy
   before_script:
-    - apk add --no-cache bash curl jq gettext python3 py3-pip
+    - apk add --no-cache bash jq gettext python3 py3-pip
     - pip3 install awscli
     - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
   script:
