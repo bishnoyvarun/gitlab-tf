@@ -49,27 +49,14 @@ apply:
  
 
 deploy:
-  image: alpine/helm:latest
+  image: bitnami/helm:latest
   stage: deploy
-  #before_script:
-  #  - echo "TF_STATE_REGION=$TF_STATE_REGION"
-  #  - echo "Running aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster"
-    # Install dependencies
-  #  - apk add --no-cache bash curl jq gettext helm kubectl
-
-    # Configure AWS credentials (optional if already set in GitLab variables)
-  #  - aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
-  #  - aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
-  #  - aws configure set default.region "$AWS_DEFAULT_REGION"
-
-    # Update kubeconfig for EKS
-  #  - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
-
-    # Validate connection
-  #  - kubectl get nodes
+  before_script:
+    - apk add --no-cache curl jq
+    - aws eks update-kubeconfig --region $TF_STATE_REGION --name my-cluster
   script:
     - cd nginx-chart
-    - helm install 1st-release .
+    - helm upgrade --install 1st-release . --namespace default --create-namespace
   when: manual
   dependencies:
     - apply
