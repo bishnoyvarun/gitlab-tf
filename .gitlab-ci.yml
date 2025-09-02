@@ -4,7 +4,7 @@ image:
   
 variables:
   TF_STATE_REGION: "eu-north-1"
-  TF_STATE_BUCKET: "demosimplebucket-5f70fcf255f8f675"   # S3 bucket for remote state
+  TF_STATE_BUCKET: "demosimplebucket-2c4520850506bd0a"   # S3 bucket for remote state
   TF_STATE_KEY: "backend.tfstate"   # Path in bucket
   #AWS_DEFAULT_REGION: $TF_STATE_REGION
 
