@@ -1,20 +1,28 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.0"
+  version = "~> 21.1.0"
 
   name               = "my-cluster"
   kubernetes_version = "1.29"
 
   addons = {
-    coredns                = {}
-    eks-pod-identity-agent = {
-      before_compute = true
-    }
-    kube-proxy             = {}
-    vpc-cni                = {
-      before_compute = true
-    }
+  coredns = {
+    addon_version  = "v1.11.4-eksbuild.14"
+    before_compute = true
   }
+  kube-proxy = {
+    addon_version  = "v1.29.15-eksbuild.10"
+    before_compute = true
+  }
+  vpc-cni = {
+    addon_version  = "v1.20.0-eksbuild.1"
+    before_compute = true
+  }
+  eks-pod-identity-agent = {
+    addon_version  = "v1.0.0-eksbuild.1"
+    before_compute = true
+  }
+}
 
   # Optional
   endpoint_public_access = true
@@ -30,8 +38,8 @@ module "eks" {
   # EKS Managed Node Group(s)
     eks_managed_node_groups = {
     test_eks_node = {
-      ami_type       = "AL2023_x86_64_STANDARD" # ✅ EKS 1.29 uses AL2023, not AL2
-    instance_types = ["t3.micro"]
+      ami_type       = "AL2023_x86_64_STANDARD" 
+    instance_types = ["c7i-flex.large"]
     min_size       = 1
     desired_size   = 1
     max_size       = 2
@@ -39,8 +47,7 @@ module "eks" {
     }
   }
 
-
-  tags = {
+ tags = {
     Environment = "dev"
     Terraform   = "true"
   }

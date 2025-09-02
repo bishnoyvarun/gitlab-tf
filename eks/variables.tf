@@ -1,14 +1,14 @@
-variable "dbtable" {
+#variable "dbtable" {
   #default = module.db.dbtable
-}
+#}
 
-variable "bucket_name" {
+#variable "bucket_name" {
   #default = module.s3.mybucket
-}                
-variable "key_name" {
+#}                
+#variable "key_name" {
     #default = module.s3.key  
   
-}
+#}
 variable "sg_var" {
   #default = module.vpc.sg
 }

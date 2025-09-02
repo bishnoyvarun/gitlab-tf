@@ -1,4 +1,4 @@
 provider "aws" {
-  region  = "eu-north-1"
-  profile = "vakky_devpos"
+  region  = var.aws_region
+  #profile = "vakky_devpos"
 }
