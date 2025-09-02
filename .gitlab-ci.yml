@@ -47,7 +47,9 @@ apply:
   dependencies:
     - plan
  
-
+#image:
+ #   name: alpine/helm:3.14.4
+  #  entrypoint: [""]
 deploy:
   image: lachlanevenson/k8s-helm:v3.14.4
   stage: deploy
