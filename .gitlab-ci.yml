@@ -48,10 +48,11 @@ apply:
     - plan
  
 #image:
- #   name: alpine/helm:3.14.4
-  #  entrypoint: [""]
+ #   name: 
 deploy:
-  image: lachlanevenson/k8s-helm:v3.14.4
+  image: 
+    name: alpine/helm:3.14.4
+    entrypoint: [""]
   stage: deploy
   before_script:
     - apk add --no-cache bash jq gettext python3 py3-pip
